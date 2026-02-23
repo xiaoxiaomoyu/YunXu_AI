@@ -1,11 +1,13 @@
 package com.example.yunxu_ai.config;
 
+import com.example.yunxu_ai.constants.SystemConstants;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,6 +30,19 @@ public class CommonConfiguration {
                 .defaultAdvisors(
                         new SimpleLoggerAdvisor(),  // 日志增强器
                         MessageChatMemoryAdvisor.builder(chatMemory).build()    //会话记忆功能
+                )
+                .build();
+    }
+
+    //哄哄模拟器游戏会话
+    @Bean
+    public ChatClient gameChatClient(OpenAiChatModel model, ChatMemory chatMemory) {
+        return ChatClient
+                .builder(model)
+                .defaultSystem(SystemConstants.GAME_SYSTEM_PROMPT)
+                .defaultAdvisors(
+                        new SimpleLoggerAdvisor(),
+                        MessageChatMemoryAdvisor.builder(chatMemory).build()  // 修改这里，使用builder模式
                 )
                 .build();
     }
