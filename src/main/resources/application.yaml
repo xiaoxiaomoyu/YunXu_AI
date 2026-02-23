@@ -7,6 +7,12 @@ spring:
         options:
           temperature: 0.7
           num-predict: 2000
+    openai:
+      base-url: https://dashscope.aliyuncs.com/compatible-mode
+      api-key: ${OPENAI_API_KEY} # 这里用到的方法是 ${}，表示从环境变量中获取值，在编辑配置里面的环境变量中添加 OPENAI_API_KEY，我这里没添加，后面要用再添加
+      chat:
+        options:
+          model: qwen-max-latest # 可选择的模型列表 https://help.aliyun.com/zh/model-studio/getting-started/models
 logging:
   level:
     org.springframework.ai.chat.client.advisor: debug
