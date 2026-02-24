@@ -1,6 +1,7 @@
 package com.example.yunxu_ai.config;
 
 import com.example.yunxu_ai.constants.SystemConstants;
+import com.example.yunxu_ai.tools.CourseTools;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -10,6 +11,9 @@ import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import static com.example.yunxu_ai.constants.SystemConstants.GAME_SYSTEM_PROMPT;
+import static com.example.yunxu_ai.constants.SystemConstants.CUSTOMER_SERVICE_SYSTEM;
 
 @Configuration
 public class CommonConfiguration {
@@ -44,6 +48,21 @@ public class CommonConfiguration {
                         new SimpleLoggerAdvisor(),
                         MessageChatMemoryAdvisor.builder(chatMemory).build()  // 修改这里，使用builder模式
                 )
+                .build();
+    }
+
+    //客户服务
+    @Bean
+    public ChatClient serviceChatClient(
+            OpenAiChatModel model,
+            ChatMemory chatMemory,
+            CourseTools courseTools) {
+        return ChatClient.builder(model)
+                .defaultSystem(CUSTOMER_SERVICE_SYSTEM)
+                .defaultAdvisors(
+                        MessageChatMemoryAdvisor.builder(chatMemory).build(), // CHAT MEMORY
+                        new SimpleLoggerAdvisor())
+                .defaultTools(courseTools)
                 .build();
     }
 }
