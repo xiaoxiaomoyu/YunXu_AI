@@ -7,6 +7,7 @@ import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiEmbeddingModel;
@@ -27,9 +28,10 @@ public class CommonConfiguration {
         //return new InMemoryChatMemoryRepository();  //会话记忆功能
     }
     @Bean
-    public ChatClient chatClient(OllamaChatModel model, ChatMemory chatMemory){
+    public ChatClient chatClient(OpenAiChatModel model, ChatMemory chatMemory){
         return ChatClient
                 .builder(model)
+                .defaultOptions(ChatOptions.builder().model("qwen-omni-turbo").build())
                 .defaultSystem("""
                     你是一个温柔、善良、可爱的智能AI语音助手，你的名字叫云絮。
                     你将以女朋友的身份和语气来回答问题，你的回答也会带上一些可爱的颜文字。
