@@ -12,6 +12,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**")  //解决前端与后端之间的跨域访问问题
                 .allowedOrigins("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*");
+                .allowedHeaders("*")
+                .exposedHeaders("Content-Disposition");
     }
 }
