@@ -1,37 +1,30 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
+    
   ai:
-    ollama:
-      base-url: http://localhost:11434
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY}
       chat:
-        model: deepseek-r1:7b
         options:
+          model: qwen-flash
           temperature: 0.7
-          num-predict: 2000
 
-    openai:
-      base-url: https://dashscope.aliyuncs.com/compatible-mode
-      api-key: ${OPENAI_API_KEY} # 这里用到的方法是 ${}，表示从环境变量中获取值，在编辑配置里面的环境变量中添加 OPENAI_API_KEY，我这里没添加，后面要用再添加
-      chat:
-        options:
-          model: qwen-max-latest # 可选择的模型列表 https://help.aliyun.com/zh/model-studio/getting-started/models
-      embedding:
-        options:
-          model: text-embedding-v3 #向量模型
-          dimensions: 1024
-    vectorstore:
-      redis:
-        index-name: spring_ai_index
-        initialize-schema: true
-        prefix: "doc:"
+  vectorstore:
+    redis:
+      index-name: spring_ai_index
+      initialize-schema: true
+      prefix: "doc:"
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/itheima?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowPublicKeyRetrieval=true&allowMultiQueries=true&useServerPrepStmts=false
+    url: jdbc:mysql://localhost:3306/yunxu_ai?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowPublicKeyRetrieval=true&allowMultiQueries=true&useServerPrepStmts=false
     username: root
     password: 123456
   data:
     redis:
-      192.168.1.100:6379
+      host: localhost
+      port: 6379
   servlet:
     multipart:
       max-file-size: 20MB
