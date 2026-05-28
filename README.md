@@ -1,6 +1,6 @@
 # 云絮 AI
 
-云絮 AI 是一个基于 Spring Boot、Spring AI Alibaba DashScope 和 Vue 3 的智能对话项目。当前仓库以 `D:\JAVA\YunXu_AI` 为根目录管理，后端、前端、MCP 服务和文档分别放在独立目录中，便于后续维护。
+云絮 AI 是一个基于 Spring Boot、Spring AI Alibaba DashScope 和 Vue 3 的智能对话项目。仓库采用前后端分离的目录结构，后端、前端、MCP 服务和项目文档分别独立管理，便于后续维护和扩展。
 
 ## 功能概览
 
@@ -8,7 +8,7 @@
 - 课程智能客服：保留课程、校区、预约等工具调用能力。
 - 哄哄模拟器：保留原有游戏对话场景。
 - 恋爱大师：提供同步和 SSE 两种对话接口，并接入本地 Markdown RAG。
-- 云絮超级智能体：整合 Manus 风格工具调用、受限文件工作区、搜索、抓取、PDF、终止工具等能力。
+- 云絮超级智能体：整合 Manus 风格工具调用、受限文件工作区、搜索、抓取、PDF 和终止工具等能力。
 - 可选扩展：MCP 图片搜索、PGVector、文件记忆、结构化输出、Knife4j 文档和受限终端工具均通过配置开关控制。
 
 ## 技术栈
@@ -118,4 +118,5 @@ SSE 智能体接口使用 `[DONE]` 作为结束标记，方便前端可靠收尾
 ## 文档
 
 - 智能体整合说明：[docs/agent-integration.md](docs/agent-integration.md)
+- 提交说明建议使用简洁中文动宾短语，例如：`添加智能客服功能`、`修复后端测试配置`、`更新项目文档`。
 - 提交规范：[CONTRIBUTING.md](CONTRIBUTING.md)
