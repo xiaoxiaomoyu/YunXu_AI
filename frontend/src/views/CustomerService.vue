@@ -1,5 +1,11 @@
 <template>
   <div class="customer-service" :class="{ 'dark': isDark }">
+    <div class="page-header">
+      <button class="back-button" @click="$router.push('/')" title="返回首页">
+        <ArrowLeftIcon class="icon" />
+      </button>
+      <h1 class="page-title">云絮 AI 智能客服</h1>
+    </div>
     <div class="chat-container">
       <div class="sidebar">
         <div class="history-header">
@@ -86,7 +92,8 @@ import {
   PaperAirplaneIcon,
   PlusIcon,
   ComputerDesktopIcon,
-  XMarkIcon
+  XMarkIcon,
+  ArrowLeftIcon
 } from '@heroicons/vue/24/outline'
 import ChatMessage from '../components/ChatMessage.vue'
 import { chatAPI } from '../services/api'
@@ -290,8 +297,70 @@ onMounted(() => {
   right: 0;
   bottom: 0;
   display: flex;
+  flex-direction: column;
   background: var(--bg-color);
   overflow: hidden;
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    flex-shrink: 0;
+    z-index: 50;
+
+    .dark & {
+      background: rgba(30, 30, 30, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .back-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.05);
+      color: #555;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(0, 124, 240, 0.1);
+        color: #007CF0;
+        transform: translateX(-2px);
+      }
+
+      .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
+      .dark & {
+        background: rgba(255, 255, 255, 0.08);
+        color: #ccc;
+
+        &:hover {
+          background: rgba(0, 124, 240, 0.2);
+          color: #007CF0;
+        }
+      }
+    }
+
+    .page-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      background: linear-gradient(45deg, #007CF0, #00DFD8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
 
   .chat-container {
     flex: 1;
@@ -665,6 +734,14 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .customer-service {
+    .page-header {
+      padding: 0.75rem 1rem;
+
+      .page-title {
+        font-size: 1.1rem;
+      }
+    }
+
     .chat-container {
       padding: 0;
     }

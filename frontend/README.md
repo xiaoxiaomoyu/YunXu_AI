@@ -1,20 +1,26 @@
-# YunXu AI Frontend
+# 云絮 AI 前端
 
-Vue 3 + Vite frontend for YunXu AI.
+`frontend/` 是云絮 AI 的 Vue 3 + Vite 前端项目，负责首页入口、通用聊天、课程客服、哄哄模拟器、恋爱大师和云絮超级智能体页面。
 
-## Scripts
+## 常用命令
 
-```bash
-npm install
-npm run dev
-npm run build
+```powershell
+npm.cmd install
+npm.cmd run dev
+npm.cmd run build
 ```
 
-The API base URL is currently configured in `src/services/api.js` as `http://localhost:8080`.
+## 主要路由
 
-## Main Views
-
-- `/`：应用中心
-- `/ai-chat`：通用 AI 对话
+- `/`：应用首页
+- `/ai-chat`：通用 AI 聊天
+- `/customer-service`：课程智能客服
 - `/game`：哄哄模拟器
-- `/customer-service`：智能客服
+- `/love-master`：恋爱大师
+- `/super-agent`：云絮超级智能体
+
+## 接口封装
+
+- 原有业务接口保留在 `src/services/api.js`。
+- 智能体 SSE 接口位于 `src/services/agentApi.ts`。
+- 默认后端地址为 `http://localhost:8080`。

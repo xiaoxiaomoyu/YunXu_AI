@@ -10,7 +10,7 @@
           class="card"
         >
           <div class="card-content">
-            <component :is="app.icon" class="icon" />
+            <component :is="app.icon" class="icon" :class="app.iconClass" />
             <h2>{{ app.title }}</h2>
             <p>{{ app.description }}</p>
           </div>
@@ -26,7 +26,9 @@ import { useDark } from '@vueuse/core'
 import { 
   ChatBubbleLeftRightIcon,
   HeartIcon,
-  UserGroupIcon
+  UserGroupIcon,
+  SparklesIcon,
+  CpuChipIcon
 } from '@heroicons/vue/24/outline'
 
 const isDark = useDark()
@@ -41,11 +43,10 @@ const aiApps = ref([
   },
   {
     id: 2,
-    title: '哄哄模拟器',
-    description: '一个帮助你练习哄女朋友开心的小游戏',
-    route: '/game',
-    icon: HeartIcon,
-    iconClass: 'heart-icon'
+    title: 'AI 超级智能体',
+    description: '可拆解复杂任务并调用工具的云絮执行助手',
+    route: '/super-agent',
+    icon: CpuChipIcon
   },
   {
     id: 3,
@@ -53,6 +54,22 @@ const aiApps = ref([
     description: '24 小时在线的智能课程咨询师',
     route: '/customer-service',
     icon: UserGroupIcon
+  },
+  {
+    id: 4,
+    title: 'AI 恋爱大师',
+    description: '陪你梳理亲密关系里的情绪、沟通与选择',
+    route: '/love-master',
+    icon: SparklesIcon,
+    iconClass: 'love-icon'
+  },
+  {
+    id: 5,
+    title: '哄哄模拟器',
+    description: '一个帮助你练习哄女朋友开心的小游戏',
+    route: '/game',
+    icon: HeartIcon,
+    iconClass: 'heart-icon'
   }
 ])
 </script>
@@ -141,6 +158,10 @@ const aiApps = ref([
       &.heart-icon {
         color: #ff4d4f;
         animation: pulse 1.5s ease-in-out infinite;
+      }
+
+      &.love-icon {
+        color: #ff5d8f;
       }
     }
 

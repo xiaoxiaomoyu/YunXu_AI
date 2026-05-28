@@ -1,0 +1,95 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    
+  ai:
+    dashscope:
+      api-key: ${QWEN_API_KEY}
+      chat:
+        options:
+          model: qwen-flash
+          temperature: 0.7
+    mcp:
+      client:
+        enabled: ${YUNXU_MCP_CLIENT_ENABLED:false}
+        stdio:
+          servers-configuration: classpath:mcp-servers.json
+
+  vectorstore:
+    redis:
+      index-name: spring_ai_index
+      initialize-schema: true
+      prefix: "doc:"
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yunxu_ai?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowPublicKeyRetrieval=true&allowMultiQueries=true&useServerPrepStmts=false
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 30MB
+
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor: debug
+    com.example.yunxu_ai: debug
+server:
+  port: 8080
+
+search-api:
+  api-key: ${SEARCH_API_API_KEY:}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: default
+      paths-to-match: /**
+      packages-to-scan: com.example.yunxu_ai.controller
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+yunxu:
+  agent:
+    workspace-dir: ${YUNXU_AGENT_WORKSPACE:tmp/agent-workspace}
+    terminal:
+      enabled: ${YUNXU_AGENT_TERMINAL_ENABLED:false}
+      timeout-seconds: ${YUNXU_AGENT_TERMINAL_TIMEOUT_SECONDS:10}
+      max-output-chars: ${YUNXU_AGENT_TERMINAL_MAX_OUTPUT_CHARS:4000}
+      allowed-working-dir: ${YUNXU_AGENT_TERMINAL_WORKDIR:tmp/agent-workspace}
+      blocked-commands:
+        - del
+        - erase
+        - format
+        - rd
+        - rmdir
+        - remove-item
+        - rm
+        - shutdown
+        - taskkill
+        - git reset
+        - git checkout
+    love-app:
+      file-memory-enabled: ${YUNXU_LOVE_APP_FILE_MEMORY_ENABLED:false}
+      file-memory-dir: ${YUNXU_LOVE_APP_FILE_MEMORY_DIR:tmp/chat-memory}
+    rag:
+      pgvector:
+        enabled: ${YUNXU_PGVECTOR_ENABLED:false}
+        url: ${YUNXU_PGVECTOR_URL:jdbc:postgresql://localhost:5432/yunxu_ai}
+        username: ${YUNXU_PGVECTOR_USERNAME:postgres}
+        password: ${YUNXU_PGVECTOR_PASSWORD:postgres}
+        schema-name: public
+        table-name: vector_store

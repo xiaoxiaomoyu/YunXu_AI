@@ -28,6 +28,16 @@ const router = createRouter({
       name: 'Game',
       component: () => import('../views/GameChat.vue'),
     },
+    {
+      path: '/love-master',
+      name: 'LoveMaster',
+      component: () => import('../views/LoveMaster.vue'),
+    },
+    {
+      path: '/super-agent',
+      name: 'SuperAgent',
+      component: () => import('../views/SuperAgent.vue'),
+    },
   ],
 })
 
